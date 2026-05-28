@@ -23,7 +23,7 @@ public record UserResponse(
                 user.getRole().name(),
                 user.getAvatarUrl(),
                 user.getEcoPoints(),
-                user.getIsActive(),
+                user.isActive(),
                 user.getCreatedAt()
         );
     }

@@ -47,14 +47,14 @@ public class NotificationService {
     public void markAsRead(Long notificationId) {
         Notification notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Notification not found"));
-        notification.setIsRead(true);
+        notification.setRead(true);
         notificationRepository.save(notification);
     }
 
     @Transactional
     public void markAllAsRead(Long userId) {
         List<Notification> unread = notificationRepository.findByUserIdAndIsReadFalse(userId);
-        unread.forEach(n -> n.setIsRead(true));
+        unread.forEach(n -> n.setRead(true));
         notificationRepository.saveAll(unread);
     }
 }

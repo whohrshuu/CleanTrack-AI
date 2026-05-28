@@ -25,7 +25,7 @@ public record WorkerResponse(
                 w.getEmployeeId(),
                 w.getCleaningCenter() != null ? w.getCleaningCenter().getName() : null,
                 w.getShiftStatus().name(),
-                w.getIsAvailable(),
+                w.isAvailable(),
                 w.getCurrentLatitude(),
                 w.getCurrentLongitude(),
                 w.getTasksCompleted(),
