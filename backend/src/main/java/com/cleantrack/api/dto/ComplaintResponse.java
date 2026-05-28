@@ -47,7 +47,7 @@ public record ComplaintResponse(
                 c.getWardNumber(),
                 c.getZone(),
                 c.getAiFakeScore(),
-                c.getAiVerified(),
+                c.isAiVerified(),
                 c.getSubmittedAt(),
                 c.getAssignedAt(),
                 c.getResolvedAt(),

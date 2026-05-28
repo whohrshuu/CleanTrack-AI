@@ -37,7 +37,7 @@ public class WorkerService {
         Worker worker = workerRepository.findById(workerId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Worker not found"));
         worker.setShiftStatus(status);
-        worker.setIsAvailable(status == ShiftStatus.ON_DUTY);
+        worker.setAvailable(status == ShiftStatus.ON_DUTY);
         worker.setLastActiveAt(Instant.now());
         return WorkerResponse.from(workerRepository.save(worker));
     }

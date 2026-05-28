@@ -29,7 +29,7 @@ public class AdminService {
         long totalWorkers = workerRepository.count();
         long activeWorkers = workerRepository.findByShiftStatus(ShiftStatus.ON_DUTY).size();
         long slaBreaches = complaintRepository.countBySlaDeadlineBeforeAndStatusNotIn(
-                Instant.now(), List.of(ComplaintStatus.COMPLETED, ComplaintStatus.VERIFIED, ComplaintStatus.CLOSED, ComplaintStatus.REJECTED));
+                Instant.now(), List.of(ComplaintStatus.RESOLVED, ComplaintStatus.CLOSED, ComplaintStatus.REJECTED));
 
         return new DashboardStatsResponse(
                 todayComplaints, pendingAssignment, inProgress, resolvedToday,

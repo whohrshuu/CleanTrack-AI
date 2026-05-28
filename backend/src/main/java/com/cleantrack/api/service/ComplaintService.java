@@ -118,7 +118,7 @@ public class ComplaintService {
         User actor = actorId != null ? userRepository.findById(actorId).orElse(null) : null;
 
         complaint.setStatus(newStatus);
-        if (newStatus == ComplaintStatus.COMPLETED || newStatus == ComplaintStatus.VERIFIED) {
+        if (newStatus == ComplaintStatus.RESOLVED || newStatus == ComplaintStatus.CLOSED) {
             if (complaint.getResolvedAt() == null) {
                 complaint.setResolvedAt(Instant.now());
             }
