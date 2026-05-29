@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, MapPin, X, CheckCircle, Camera, Loader2 } from 'lucide-react';
 import { COMPLAINT_CATEGORIES } from '@/utils/helpers';
+import api from '@/utils/api';
 import toast from 'react-hot-toast';
 
 export default function ComplaintSubmit() {
