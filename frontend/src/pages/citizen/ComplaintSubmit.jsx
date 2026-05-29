@@ -84,11 +84,16 @@ export default function ComplaintSubmit() {
     if (!form.category) { toast.error('Please select a category'); return; }
     if (!form.address) { toast.error('Please set the location'); return; }
 
-    setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitting(false);
-    toast.success('Complaint submitted successfully!');
-    navigate('/citizen/complaints');
+    try {
+      setSubmitting(true);
+      await api.post('/complaints', form);
+      toast.success('Complaint submitted successfully!');
+      navigate('/citizen/complaints');
+    } catch (error) {
+      toast.error('Failed to submit complaint');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

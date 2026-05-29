@@ -19,8 +19,8 @@ export default function ComplaintManagement() {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const response = await api.get('/complaints?size=100');
-        setComplaints(response.data?.content || response.data || []);
+        const response = await api.get('/admin/complaints');
+        setComplaints(response.data || []);
       } catch (error) {
         toast.error('Failed to load complaints');
       } finally {
@@ -101,7 +101,7 @@ export default function ComplaintManagement() {
                       <td className="px-4 py-3 text-xs text-neutral-500">{timeAgo(c.submittedAt)}</td>
                       <td className="px-4 py-3">
                         {!c.workerName ? (
-                          <button className="text-xs font-medium text-primary-500 hover:text-primary-600 flex items-center gap-1"><UserPlus size={12} /> Assign</button>
+                          <button onClick={() => setAssignModal(c.id)} className="text-xs font-medium text-primary-500 hover:text-primary-600 flex items-center gap-1"><UserPlus size={12} /> Assign</button>
                         ) : (
                           <span className="text-xs text-neutral-400">{c.workerName}</span>
                         )}
@@ -117,6 +117,41 @@ export default function ComplaintManagement() {
           </div>
         )}
       </div>
+
+      {/* Assign Modal */}
+      {assignModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg w-full max-w-sm p-5">
+            <h3 className="text-lg font-semibold text-neutral-900 mb-4">Assign Worker</h3>
+            <div className="space-y-3">
+              <label className="text-sm font-medium text-neutral-700 block">Enter Worker ID</label>
+              <input type="number" id="workerIdInput" placeholder="Worker ID (e.g. 1)" className="w-full h-9 px-3 border border-border rounded-md text-sm focus:outline-none focus:border-primary-500" />
+            </div>
+            <div className="flex items-center gap-3 mt-6">
+              <button 
+                onClick={async () => {
+                  const wId = document.getElementById('workerIdInput').value;
+                  if (!wId) return;
+                  try {
+                    await api.put(`/admin/complaints/${assignModal}/assign`, { workerId: wId });
+                    toast.success('Worker assigned successfully');
+                    setAssignModal(null);
+                    // Refresh
+                    const response = await api.get('/admin/complaints');
+                    setComplaints(response.data || []);
+                  } catch(e) { toast.error('Failed to assign worker'); }
+                }}
+                className="flex-1 py-2 bg-primary-500 text-white text-sm font-medium rounded-md hover:bg-primary-600"
+              >
+                Assign
+              </button>
+              <button onClick={() => setAssignModal(null)} className="flex-1 py-2 bg-neutral-100 text-neutral-700 text-sm font-medium rounded-md hover:bg-neutral-200">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

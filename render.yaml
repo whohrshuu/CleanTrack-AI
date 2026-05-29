@@ -56,7 +56,7 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://cleantrack-api.onrender.com/api
+        value: https://cleantrack-api-1dmj.onrender.com/api
 
 databases:
   - name: cleantrack-db

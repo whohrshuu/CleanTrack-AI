@@ -26,11 +26,11 @@ export default function AdminDashboard() {
       try {
         const [statsRes, complaintsRes] = await Promise.all([
           api.get('/admin/dashboard'),
-          api.get('/complaints?page=0&size=5')
+          api.get('/admin/complaints')
         ]);
         // Support both structured maps or flat DTO responses depending on backend implementation
         setStats(statsRes.data);
-        setRecentComplaints(complaintsRes.data?.content || complaintsRes.data || []);
+        setRecentComplaints(complaintsRes.data || []);
       } catch (error) {
         toast.error('Failed to load dashboard statistics');
       } finally {

@@ -30,7 +30,7 @@ export default function WorkerDashboard() {
   const toggleShift = async () => {
     try {
       const newStatus = !shiftStatus ? 'ON_DUTY' : 'OFF_DUTY';
-      await api.put(`/workers/shift?status=${newStatus}`);
+      await api.put('/workers/shift', { status: newStatus });
       setShiftStatus(!shiftStatus);
       toast.success(!shiftStatus ? 'Shift started. New tasks incoming.' : 'Shift ended. Stay safe!');
     } catch (error) {

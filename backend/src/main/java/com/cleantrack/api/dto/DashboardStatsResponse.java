@@ -1,5 +1,8 @@
 package com.cleantrack.api.dto;
 
+import java.util.List;
+import java.util.Map;
+
 public record DashboardStatsResponse(
         long todayComplaints,
         long pendingAssignment,
@@ -7,5 +10,8 @@ public record DashboardStatsResponse(
         long resolvedToday,
         long totalWorkers,
         long activeWorkers,
-        long slaBreaches
+        long slaBreaches,
+        List<Map<String, Object>> weeklyTrend,
+        List<Map<String, Object>> categoryBreakdown,
+        List<Map<String, Object>> zonePerformance
 ) {}

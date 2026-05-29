@@ -130,13 +130,13 @@ export default function LoginPage() {
       <div className="mt-6 p-3 bg-neutral-50 border border-border rounded-md">
         <p className="text-xs font-medium text-neutral-600 mb-1">Demo Login</p>
         <p className="text-[11px] text-neutral-500 leading-relaxed">
-          Use any email to login. Role is determined by email domain:
+          The following test accounts have been seeded (Password: <code className="text-primary-600">password123</code>):
           <br />
-          <code className="text-primary-600">@citizen.com</code> → Citizen ·{' '}
-          <code className="text-primary-600">@worker.com</code> → Worker
+          <code className="text-primary-600">priya.sharma@email.com</code> → Citizen
           <br />
-          <code className="text-primary-600">@admin.com</code> → Admin ·{' '}
-          <code className="text-primary-600">@gov.com</code> → Government
+          <code className="text-primary-600">raju.kumar@bbmp.gov.in</code> → Worker
+          <br />
+          <code className="text-primary-600">ramesh.admin@bbmp.gov.in</code> → Admin
         </p>
       </div>
 
